@@ -1,4 +1,4 @@
-﻿//cd c:\Users\IceCold\Documents\Visual Studio 2013\WebSites\WebSite2\advent
+﻿//cd c:\Users\IceCold\Documents\Visual Studio 2013\WebSites\LocalADV\advent
 //cl /clr Advent.cpp /link /dll /out:..\bin\Advent.dll
 #include <stdlib.h>
 #include <string.h>
@@ -806,7 +806,7 @@ private:
 		int word1, word2, type1, type2;
 		int oldob, oldobj;
 
-		_chdir("D:\\home\\site\\wwwroot");
+		_chdir("C:\\inetpub\\wwwroot");
 
 		CString tmp(ip);
 		strcpy(SaveFile, tmp);
@@ -882,18 +882,18 @@ protected:
 	static bool ready_in;
 	static bool ready_out;
 	static Thread ^newThread;
-	static bool rld = false;
+	static int rld = 0;
 	Button ^Button;
 	TextBox ^Log;
 	TextBox ^Command;
-	Encoding^ from = System::Text::Encoding::GetEncoding(28591);
+	Encoding^ from = System::Text::Encoding::GetEncoding(1251);
 	Encoding^ to = System::Text::Encoding::GetEncoding(866);
 	array<Byte>^ bytes;
 
 public:
 
 	void Page_LoadComplete(Object ^sender, EventArgs ^e) {
-		if (rld) {
+		if (rld == 0) {
 			ip = HttpContext::Current->Request->UserHostAddress;
 			ThreadStart ^threadDelegate = gcnew ThreadStart(this, &Advent::main);
 			newThread = gcnew Thread(threadDelegate);
@@ -904,7 +904,7 @@ public:
 			bytes = from->GetBytes(str_out);
 			str_out = to->GetString(bytes);
 			Log->Text = str_out;
-			rld = true;
+			rld++;
 		}
 	}
 
