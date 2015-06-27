@@ -7,7 +7,6 @@
 #include <io.h>
 #include <direct.h>
 #include "..\common\advcommo.h"
-#include "..\common\advexter.h"
 #include <atlstr.h>
 #using <system.dll>
 #using <mscorlib.dll>
